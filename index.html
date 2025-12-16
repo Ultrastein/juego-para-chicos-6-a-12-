@@ -144,7 +144,6 @@
                 <button class="mc-btn blue" onclick="openSubject('matematica')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">📐</div>Matemática<br><br><small>Nivel <span id="lbl-math">1</span></small></button>
                 <button class="mc-btn green" onclick="openSubject('compu')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">🤖</div>Computación<br><br><small>Nivel <span id="lbl-logic">1</span></small></button>
                 <button class="mc-btn red" onclick="openSubject('teclado')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">⌨️</div>Teclado<br><br><small>Nivel <span id="lbl-typing">1</span></small></button>
-                
                 <button class="mc-btn purple" onclick="openSubject('ingles')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">🇺🇸</div>Ingles<br><br><small>Nivel <span id="lbl-ingles">1</span></small></button>
             </div>
         </div>
@@ -183,8 +182,8 @@
 <div class="overlay" id="adminLoginModal" style="display:none;">
     <div class="modal-box" style="width:400px;">
         <h3>Zona Developers</h3>
-        <input type="text" id="adminUser" placeholder="Usuario (admin)">
-        <input type="password" id="adminPass" placeholder="Contraseña (minecraft)">
+        <input type="text" id="adminUser" placeholder="Usuario">
+        <input type="password" id="adminPass" placeholder="Contraseña">
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="mc-btn green" style="flex:1;" onclick="checkAdmin()">Entrar</button>
             <button class="mc-btn gray" style="flex:1;" onclick="document.getElementById('adminLoginModal').style.display='none'">Cerrar</button>
@@ -529,4 +528,5 @@
 </body>
 
 </html>
+
 
