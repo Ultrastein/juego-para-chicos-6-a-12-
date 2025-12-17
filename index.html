@@ -10,75 +10,58 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
     <style>
-        /* --- ESTILOS VISUALES --- */
-        :root {
-            --sky: #e0f7fa; --cloud: #ffffff; --text: #37474f;
-            --btn-green: #66bb6a; --btn-blue: #42a5f5; --btn-purple: #ab47bc; --btn-red: #ef5350;
-            --stone: #90a4ae; --gold: #ffd700;
-        }
+        /* ESTILOS (Idénticos) */
+        :root { 
+            --sky: #e0f7fa; 
+            --cloud: #ffffff; 
+            --text: #37474f; 
+            --btn-green: #66bb6a; 
+            --btn-blue: #42a5f5; 
+            --btn-purple: #ab47bc; 
+            --btn-red: #ef5350; 
+            --stone: #90a4ae;
+            --gold: #ffd700; 
+            ----btn-pink: #e368e7;}
         * { box-sizing: border-box; }
-        body { 
-            font-family: 'Press Start 2P', cursive; background-color: var(--sky);
-            background-image: radial-gradient(#b2ebf2 15%, transparent 16%), radial-gradient(#b2ebf2 15%, transparent 16%);
-            background-size: 30px 30px; color: var(--text); margin: 0; padding: 20px; 
-            user-select: none; line-height: 1.5;
-        }
-
+        body { font-family: 'Press Start 2P', cursive; background-color: var(--sky); background-image: radial-gradient(#b2ebf2 15%, transparent 16%), radial-gradient(#b2ebf2 15%, transparent 16%); background-size: 30px 30px; color: var(--text); margin: 0; padding: 20px; user-select: none; line-height: 1.5; }
         .app-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 320px; gap: 20px; }
         header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
         .panel { background: var(--cloud); border: 4px solid #37474f; padding: 20px; margin-bottom: 20px; box-shadow: 6px 6px 0px rgba(0,0,0,0.1); }
-
-        /* BOTONES */
-        .mc-btn { 
-            color: #fff; border: 4px solid; padding: 15px; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; 
-            cursor: pointer; text-transform: uppercase; box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.2); 
-            position: relative; transition: transform 0.1s; 
-        }
+        .mc-btn { color: #fff; border: 4px solid; padding: 15px; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.2); position: relative; transition: transform 0.1s; }
         .mc-btn:active { transform: translateY(4px); box-shadow: inset -2px -2px 0px 0px rgba(0,0,0,0.2); }
-        .mc-btn.green { background-color: var(--btn-green); border-color: #2e7d32; }
-        .mc-btn.blue { background-color: var(--btn-blue); border-color: #1565c0; }
-        .mc-btn.purple { background-color: var(--btn-purple); border-color: #7b1fa2; }
-        .mc-btn.red { background-color: var(--btn-red); border-color: #c62828; }
+        .mc-btn.green { background-color: var(--btn-green); border-color: #2e7d32; } 
+        .mc-btn.blue { background-color: var(--btn-blue); border-color: #1565c0; } 
+        .mc-btn.purple { background-color: var(--btn-purple); border-color: #7b1fa2; } 
+        .mc-btn.red { background-color: var(--btn-red); border-color: #c62828; } 
         .mc-btn.gray { background-color: var(--stone); border-color: #546e7a; }
+        .mc-btn.pink { background-color: var(----btn-pink); border-color: #e368e7; }
 
-        /* AVATAR */
         .avatar-container { display: flex; flex-direction: column; align-items: center; gap: 2px; transform: scale(1.8); margin: 40px 0; }
         .mc-part { border: 2px solid #000; background-size: cover !important; background-position: center !important; image-rendering: pixelated; position: relative; }
         .mc-head { width: 40px; height: 40px; background: #ffcc80; z-index: 5; }
         .mc-eyes { display: flex; gap: 14px; position: absolute; top: 15px; left: 6px; pointer-events: none; }
-        .eye { width: 6px; height: 6px; background: white; border: 1px solid black; }
-        .pupil { width: 3px; height: 3px; background: black; margin-left: 2px; margin-top: 1px; }
-        .mc-body-row { display: flex; gap: 2px; z-index: 4; }
-        .mc-arm { width: 12px; height: 40px; background: #ffcc80; margin-top: 0; }
-        .mc-torso { width: 40px; height: 40px; background: #29b6f6; }
-        .mc-legs-row { display: flex; gap: 2px; z-index: 3; }
-        .mc-leg { width: 18px; height: 40px; background: #3f51b5; }
-
-        /* LEADERBOARD */
+        .eye { width: 6px; height: 6px; background: white; border: 1px solid black; } .pupil { width: 3px; height: 3px; background: black; margin-left: 2px; margin-top: 1px; }
+        .mc-body-row { display: flex; gap: 2px; z-index: 4; } .mc-arm { width: 12px; height: 40px; background: #ffcc80; margin-top: 0; } .mc-torso { width: 40px; height: 40px; background: #29b6f6; }
+        .mc-legs-row { display: flex; gap: 2px; z-index: 3; } .mc-leg { width: 18px; height: 40px; background: #3f51b5; }
         .leaderboard-list { display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; }
         .leaderboard-row { display: flex; align-items: center; gap: 10px; background: #eceff1; padding: 8px; border: 2px solid #b0bec5; font-size: 0.6rem; }
         .leaderboard-row.top-1 { border-color: var(--gold); background: #fffde7; }
         .mini-avatar-box { transform: scale(0.5); width: 45px; height: 70px; margin: -20px -5px; } 
-
-        /* NIVELES */
         .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .level-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .level-block { width: 45px; height: 45px; background: #cfd8dc; border: 4px solid #90a4ae; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #546e7a; font-weight: bold; font-size: 0.8rem; }
         .level-block.locked { opacity: 0.5; cursor: not-allowed; background: #eceff1; }
         .level-block.completed { background: var(--btn-green); border-color: #2e7d32; color: white; }
         .level-block.current { background: white; border-color: var(--btn-blue); color: var(--btn-blue); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-
-        /* UI */
         input, select { padding: 12px; margin: 5px 0; width: 100%; font-family: 'Press Start 2P'; border: 2px solid #90a4ae; background: #eceff1; color: #37474f; outline: none; }
         .stats-bar { display: flex; justify-content: space-around; background: #263238; color: #4caf50; padding: 10px; border: 2px solid #000; margin-bottom: 15px; font-size: 0.7rem; }
+        .stats-item span { color: #ffeb3b; }
+        .stat-danger { color: #ef5350 !important; }
         #notification-area { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
         .toast { background: #333; color: #fff; padding: 15px 20px; border: 4px solid #fff; font-size: 0.7rem; display: flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); animation: slideIn 0.3s forwards, fadeOut 0.5s 3s forwards; min-width: 250px; }
         .toast.success { background: var(--btn-green); border-color: #1b5e20; } .toast.error { background: var(--btn-red); border-color: #b71c1c; }
-        
-        /* MODALS */
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 100; justify-content: center; align-items: center; }
-        .modal-box { background: var(--cloud); padding: 20px; border: 4px solid #37474f; width: 95%; max-width: 600px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-
+        .modal-box { background: var(--cloud); padding: 20px; border: 4px solid #37474f; width: 95%; max-width: 700px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
         .admin-tag { font-size: 0.6rem; color: #90a4ae; margin-top: 15px; cursor: pointer; text-decoration: underline; }
@@ -90,16 +73,15 @@
 
 <div class="app-container">
     <header class="panel">
-        <div>
-            <h1 style="margin:0; color:#0277bd; font-size:1.5rem;">Web de juegos para los chicos</h1>
-        </div>
+        <div><h1 style="margin:0; color:#0277bd; font-size:1.5rem;">Web de juegos</h1></div>
         <div style="text-align:right">
             <div style="color:#fbc02d; font-size:1.2rem; margin-bottom:5px;">🪙 <span id="uiCoins">0</span></div>
             <select id="gradeSelect" onchange="changeGrade()" style="width:auto; font-size:0.6rem; padding:5px;">
-                <option value="1">1º Grado</option>
-                <option value="3">3º Grado</option>
-                <option value="5">5º Grado</option>
-                <option value="7">7º Grado</option>
+                <option value="inicial">Nivel: Inicial</option>
+                <option value="intermedia">Nivel: Intermedia</option>
+                <option value="dificil">Nivel: Difícil</option>
+                <option value="experta">Nivel: Experta</option>
+                <option value="prodigio">Nivel: 🌟 Prodigio</option>
             </select>
         </div>  
     </header>
@@ -107,25 +89,12 @@
     <aside>
         <div class="panel" style="text-align:center;">
             <h3 style="font-size:0.8rem;">Nombre</h3>
-            <input type="text" id="usernameInput" placeholder="Nombre" maxlength="10" 
-                   style="text-align:center; margin-bottom:15px; font-size:0.7rem;" 
-                   onchange="updateUsername(this.value)">
-            
+            <input type="text" id="usernameInput" placeholder="Nombre" maxlength="10" style="text-align:center; margin-bottom:15px; font-size:0.7rem;" onchange="updateUsername(this.value)">
             <div class="avatar-container">
-                <div class="mc-head mc-part" id="avHead">
-                    <div class="mc-eyes" id="defaultEyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div>
-                </div>
-                <div class="mc-body-row">
-                    <div class="mc-arm mc-part" id="avArmL"></div>
-                    <div class="mc-torso mc-part" id="avTorso"></div>
-                    <div class="mc-arm mc-part" id="avArmR"></div>
-                </div>
-                <div class="mc-legs-row">
-                    <div class="mc-leg mc-part" id="avLegL"></div>
-                    <div class="mc-leg mc-part" id="avLegR"></div>
-                </div>
+                <div class="mc-head mc-part" id="avHead"><div class="mc-eyes" id="defaultEyes"><div class="eye"><div class="pupil"></div></div><div class="eye"><div class="pupil"></div></div></div></div>
+                <div class="mc-body-row"><div class="mc-arm mc-part" id="avArmL"></div><div class="mc-torso mc-part" id="avTorso"></div><div class="mc-arm" id="avArmR"></div></div>
+                <div class="mc-legs-row"><div class="mc-leg" id="avLegL"></div><div class="mc-leg" id="avLegR"></div></div>
             </div>
-            
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
                 <button class="mc-btn blue" onclick="showDashboard()"> 🎮JUEGOS</button>
                 <button class="mc-btn green" onclick="showShop()">🛍️ Tienda</button>
@@ -139,12 +108,39 @@
 
     <main class="panel">
         <div id="view-dashboard">
-            <h3 style="margin-top:0;">A que jugamos hoy??</h3>
+            <h3 style="margin-top:0;">Selecciona Modo</h3>
             <div class="subject-grid">
-                <button class="mc-btn blue" onclick="openSubject('matematica')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">📐</div>Matemática<br><br><small>Nivel <span id="lbl-math">1</span></small></button>
-                <button class="mc-btn green" onclick="openSubject('compu')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">🤖</div>Computación<br><br><small>Nivel <span id="lbl-logic">1</span></small></button>
-                <button class="mc-btn red" onclick="openSubject('teclado')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">⌨️</div>Teclado<br><br><small>Nivel <span id="lbl-typing">1</span></small></button>
-                <button class="mc-btn purple" onclick="openSubject('ingles')" style="height:120px;"><div style="font-size:2rem; margin-bottom:10px;">🇺🇸</div>Ingles<br><br><small>Nivel <span id="lbl-ingles">1</span></small></button>
+
+                <button class="mc-btn blue" onclick="openSubject('matematica')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">📐</div>
+                    Matemática<br><br>
+                    <small>Nivel <span id="lbl-math">1</span></small>
+                </button>
+
+                <button class="mc-btn green" onclick="openSubject('compu')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🤖</div>
+                    Computación<br><br>
+                    <small>Nivel <span id="lbl-logic">1</span></small>
+                </button>
+
+                <button class="mc-btn red" onclick="openSubject('teclado')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">⌨️</div>
+                    Teclado<br><br>
+                    <small>Nivel <span id="lbl-typing">1</span></small>
+                </button>
+
+                <button class="mc-btn purple" onclick="openSubject('ingles')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🇺🇸</div>
+                    Ingles<br><br>
+                    <small>Nivel <span id="lbl-ingles">1</span></small>
+                </button>
+
+                <button class="mc-btn pink" onclick="openSubject('produccion')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">⚠️</div>
+                    En produccion<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+
             </div>
         </div>
         <div id="view-map" style="display:none;">
@@ -166,7 +162,9 @@
     <aside>
         <div class="panel" style="padding:10px;">
             <h3 style="font-size:0.8rem; text-align:center; color:#f9a825;">🏆 TOP 10</h3>
-            <div class="leaderboard-list" id="leaderboardList"><div style="text-align:center; padding:20px;">Cargando...</div></div>
+            <div class="leaderboard-list" id="leaderboardList"><div style="text-align:center; padding:20px;">
+                formando...
+            </div></div>
         </div>
     </aside>
 </div>
@@ -193,40 +191,50 @@
 
 <div class="overlay" id="adminPanelModal" style="display:none;">
     <div class="modal-box" style="width:700px; text-align:left;">
-        <h3>🛠️ crear objetos</h3>
+        <h3>🛠️ Panel Creador</h3>
         <div style="background:#eceff1; padding:15px; border:2px solid #b0bec5; margin-bottom:15px;">
             <h4 style="margin-top:0;">Nuevo Item / Textura</h4>
             <input type="text" id="admItemName" placeholder="Nombre">
             <input type="number" id="admPrice" placeholder="Precio">
+            
             <select id="admType">
-                <option value="head">Cabeza</option><option value="torso">Torso</option><option value="legs">Piernas</option><option value="arm">Brazos</option>
+                <option value="head">Cabeza</option>
+                <option value="torso">Torso</option>
+                <option value="legs">Piernas</option>
+                <option value="arm">Brazos</option>
             </select>
-            <input type="text" id="admTexture" placeholder="URL Imagen o Color Hex">
+            
+            <input type="text" id="admTexture" placeholder="URL Imagen o Código Hex">
             <button class="mc-btn green" style="width:100%; margin-top:10px;" onclick="adminAddItem()">Crear Item</button>
         </div>
-        
         <div style="background:#eceff1; padding:15px; border:2px solid #b0bec5;">
             <h4 style="margin-top:0;">Nuevo Nivel</h4>
             <select id="admSubj">
                 <option value="matematica">Matemática</option>
                 <option value="compu">Computación</option>
-                <option value="teclado">Teclado</option>
                 <option value="ingles">Ingles</option>
+                <option value="teclado">Teclado</option>
+                <option value="produccion">En Producción</option>
             </select>
-            <select id="admGrade"><option value="1">Grado 1</option><option value="3">Grado 3</option><option value="5">Grado 5</option><option value="7">Grado 7</option></select>
-            <input type="number" id="admLvlNum" placeholder="Nivel">
-            <input type="text" id="admQ" placeholder="Pregunta">
+            <select id="admGrade">
+                <option value="inicial">Inicial</option>
+                <option value="intermedia">Intermedia</option>
+                <option value="dificil">Difícil</option>
+                <option value="experta">Experta</option>
+                <option value="prodigio">Prodigio</option>
+            </select> 
+            <input type="number" id="admLvlNum" placeholder="Nivel (1-60)">
+            <input type="text" id="admQ" placeholder="Pregunta / Texto Typing">
             <input type="text" id="admAns" placeholder="Respuesta Correcta">
             <input type="text" id="admOpts" placeholder="Opciones (sep. coma)">
             <button class="mc-btn blue" style="width:100%; margin-top:10px;" onclick="adminAddLevel()">Guardar Nivel</button>
         </div>
-        
         <button class="mc-btn gray" style="margin-top:20px; width:100%;" onclick="closeAdmin()">Cerrar Panel</button>
     </div>
 </div>
 
 <script>
-    // 1. CONFIGURACIÓN FIREBASE (TUS DATOS)
+    // 1. CONFIGURACIÓN FIREBASE
     const firebaseConfig = {
         apiKey: "AIzaSyD_EIqwof3YhStlpSY4PhWJLqoDtjUqsVM",
         authDomain: "web-de-juego.firebaseapp.com",
@@ -240,37 +248,202 @@
     firebase.initializeApp(firebaseConfig);
     const dbOnline = firebase.firestore();
 
-    // 2. DATOS EDUCATIVOS
-    const DB_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZÑ";
-    const DB_SIMPLE = ["SOL","PAN","LUZ","MAR","SAL","GATO","PERRO","CASA","AGUA","LUNA","ARBOL","MESA","SILLA","MANO","PIE"];
-    const DB_SHORT = ["EL SOL SALE", "LA LUNA BRILLA", "EL GATO COME", "HOLA MUNDO", "BUENOS DIAS", "VAMOS A JUGAR"];
-    const DB_DICT = ["ESCUELA", "AMIGO", "JUGUETE", "PARQUE", "CIUDAD", "VERANO", "INVIERNO", "MUSICA", "PINTURA"];
-    const DB_COMPLEX = ["PROGRAMACION", "ALGORITMO", "VERGÜENZA", "TECNOLOGIA", "BIBLIOTECA", "NAVEGADOR", "VARIABLE"];
-    const DB_LONG = ["LA INTELIGENCIA ARTIFICIAL CAMBIA EL MUNDO", "LOS ALGORITMOS RESUELVEN PROBLEMAS COMPLEJOS", "HTML Y CSS SON EL ESQUELETO DE LA WEB"];
+    // =======================================================
+    // 2. BASE DE DATOS TECLADO EXTENSA Y PROGRESIVA
+    // =======================================================
     
-    // BASE DE DATOS COMPUTACIÓN
-    const DB_COMPUTING = [
-        {q:"¿Hardware?", ans:"Fisico", opts:["Fisico","Logico","Wifi"]},
-        {q:"¿Software?", ans:"Programas", opts:["Programas","Cables","Pantalla"]},
-        {q:"Entrada", ans:"Teclado", opts:["Teclado","Monitor","Parlante"]},
-        {q:"Salida", ans:"Monitor", opts:["Monitor","Mouse","Microfono"]},
-        {q:"Cerebro PC", ans:"CPU", opts:["CPU","RAM","Disco"]},
-        {q:"Binario es", ans:"0 y 1", opts:["0 y 1","1 a 10","A y B"]},
-        {q:"Almacenar", ans:"Disco", opts:["Disco","Mouse","Pantalla"]},
-        {q:"Internet", ans:"Red", opts:["Red","Juego","Programa"]}
-    ];
+    const DB_TECLADO = {
+        // NIVEL INICIAL (Aprendizaje de teclas)
+        inicial: {
+            // Nivel 1-25: Teclas sueltas
+            letras: "ASDFJKLÑQWERTYUIOPZXCVBNM".split(''), 
+            // Nivel 26-40: Símbolos Fáciles
+            simbolos: [".", ",", ";", ":", "-", "_", "!", "?", "¿", "¡", "+", "="], //ACA SEGUI AGREGANDO
+            // Nivel 41-60: Palabras Fáciles
+            palabras: [
+                "SOL", 
+                "LUZ", 
+                "PAN", 
+                "MAR", 
+                "OSO", 
+                "MAMA", 
+                "PAPA", 
+                "GATO", 
+                "PERRO", 
+                "MESA", 
+                "SILLA", 
+                "CASA", 
+                "AUTO", 
+                "TREN", 
+                "FLOR", 
+                "RIO", 
+                "LAGO", 
+                "MANO", 
+                "PIE", 
+                "DEDO"
+                //ACA SEGUI AGREGANDO
+            ] 
+        },
+        
+        // NIVEL INTERMEDIO (Introducción a acentos y puntuación)
+        intermedia: {
+            // Nivel 1-20: Palabras medias (sin tilde)
+            palabras: [
+                "ESCUELA", 
+                "AMIGO", 
+                "JUGUETE", 
+                "PARQUE", 
+                "CIUDAD", 
+                "VERANO",
+                "INVIERNO", 
+                "MUSICA", 
+                "PINTURA", 
+                "COMIDA", 
+                "TIENDA"
+                //ACA SEGUI AGREGANDO
+            ],
+            // Nivel 21-40: Palabras con tilde y signos
+            tildes: [
+                "ÁRBOL", 
+                "CANTÓ", 
+                "AVIÓN", 
+                "NIÑO", 
+                "FELIZ", 
+                "LÁPIZ", 
+                "RATÓN", 
+                "BOTÓN", 
+                "CAFÉ", 
+                "PAPÁ", 
+                "JARDÍN", 
+                "MÚSICA", 
+                "RÁPIDO"
+            //ACA SEGUI AGREGANDO
+            ],
+            // Nivel 41-60: Oraciones cortas
+            oraciones: [
+                "EL PERRO LADRA.", 
+                "ME GUSTA EL SOL.", 
+                "HOY ES LUNES.", 
+                "¿COMO ESTAS?", 
+                "HOLA MUNDO.", 
+                "TENGO HAMBRE.", 
+                "VAMOS AL CINE."
+                  //ACA SEGUI AGREGANDO  
+            ]
+        },
 
-    // BASE DE DATOS INGLÉS (NUEVA PARA EVITAR MEZCLAS)
-    const DB_ENGLISH = [
-        {q:"Red", ans:"Rojo", opts:["Rojo","Azul","Verde"]},
-        {q:"Blue", ans:"Azul", opts:["Azul","Rojo","Amarillo"]},
-        {q:"Dog", ans:"Perro", opts:["Perro","Gato","Pato"]},
-        {q:"Cat", ans:"Gato", opts:["Gato","Perro","Vaca"]},
-        {q:"Hello", ans:"Hola", opts:["Hola","Adios","Gracias"]},
-        {q:"One", ans:"Uno", opts:["Uno","Dos","Tres"]},
-        {q:"Family", ans:"Familia", opts:["Familia","Amigos","Casa"]},
-        {q:"School", ans:"Escuela", opts:["Escuela","Parque","Cine"]}
+        // NIVEL DIFICIL (Palabras complejas y simbolos raros)
+        dificil: {
+            // Nivel 1-20: Palabras largas/complejas
+            palabras: [
+                "ELECTRODOMESTICO", 
+                "FERROCARRIL", 
+                "CONSTITUCION", 
+                "PARALELEPIPEDO", 
+                "DESOXIRRIBONUCLEICO", 
+                "CALIDOSCOPIO", 
+                "ESTERNOCLEIDOMASTOIDEO",
+                "HIPOPOTAMO",
+                "ORNITORRINCO",
+                "ANTICONSTITUCIONALIDAD",
+                "INCONSTITUCIONALIDAD",
+                "SUPERCALIFRAGILISTICOESPIALIDOSO",
+                "PROCESADOR",
+                "TELECOMUNICACIONES"
+                //ACA SEGUI AGREGANDO
+            ],
+            // Nivel 21-40: Símbolos COMPLEJOS (Chaos Mode)
+            simbolos: ["@", "#", "$", "%", "&", "/", "(", ")", "{", "}", "[", "]", "\\", "|", "°", "¬", "~", "^", "`", "*"],
+            // Nivel 41-60: Código simple
+            codigo: ["width:100%", "#FFAA00", "user_name", "email@gmail.com", "http://web.com", "$dinero", "print('Hola')", "x = y + 2", "<div>TEXTO</div>"]
+        },
+
+        // NIVEL EXPERTA (Oraciones largas)
+        experta: {
+            // Todo oraciones complejas
+            oraciones: [
+                "LA TECNOLOGIA AVANZA EXPONENCIALMENTE CADA AÑO.",
+                "LOS ALGORITMOS DE BUSQUEDA SON FUNDAMENTALES.",
+                "LA INTELIGENCIA ARTIFICIAL GENERATIVA CREA ARTE.",
+                "EL DESARROLLO DE SOFTWARE REQUIERE LOGICA.",
+                "LA CIBERSEGURIDAD PROTEGE LOS DATOS PRIVADOS.",
+                "LAS REDES NEURONALES IMITAN EL CEREBRO HUMANO.",
+                "PROGRAMAR ES UNA HABILIDAD VALIOSA HOY DIA.",
+                "PROGRAMAR ES CREAR",
+                "EL FUTURO ES DIGITAL Y CONECTADO",
+                "LA INNOVACION IMPULSA EL CAMBIO TECNOLOGICO",
+                "HAY QUE APRENDER SOBRE SEGURIDAD DIGITAL"
+                //ACA SEGUI AGREGANDO
+            ]
+        },
+
+        // NIVEL PRODIGIO (TEXTOS LARGOS CON MAYÚSCULAS Y MINÚSCULAS)
+        prodigio: {
+            textos: [
+                "En un lugar de la Mancha, de cuyo nombre no quiero acordarme.",
+                "Programar es el arte de decirle a otro humano lo que la PC debe hacer.",
+                "El éxito no es definitivo, el fracaso no es fatal: lo que cuenta es el coraje.",
+                "La imaginación es más importante que el conocimiento.",
+                "No he fallado, simplemente he encontrado mil maneras que no funcionan.",
+                "La vida es como andar en bicicleta: para mantener el equilibrio debes seguir adelante.",
+                "La educación es el arma más poderosa que puedes usar para cambiar el mundo.",
+                "La tecnología es solo una herramienta.",
+                "En términos de motivar a los niños y hacer que trabajen juntos, el profesor es lo más importante.",
+                "El aprendizaje nunca agota la mente.",
+                "La educación STEAM integra ciencia, tecnología, ingeniería, arte y matemáticas para formar creadores integrales.",
+                "yo aprendo a programar con los profes te Tecno Kids",
+                "la perseverancia es la clave del exito en la vida",
+                "LAS PLATAFORMAS DE APRENDIZAJE EN LÍNEA ELIMINAN LAS BARRERAS GEOGRÁFICAS Y DEMOCRATIZAN EL ACCESO A LA INFORMACIÓN GLOBAL"
+                //ACA SEGUI AGREGANDO
+            ]
+        }
+    };
+
+    // OTROS DATOS
+    const DB_COMPUTING = [
+        {q:"¿Hardware?", 
+            ans:"Fisico", //respuesta correcta
+            opts:[
+                "Fisico",
+                "Logico",
+                "Wifi"
+            ]
+        }, 
+        {q:"¿Software?", 
+            ans:"Programas", //respuesta correcta
+            opts:[
+                "Programas",
+                "Cables",
+                "Pantalla"
+            ]
+        },
+        {q:"Entrada", 
+            ans:"Teclado", //respuesta correcta
+            opts:[
+                "Teclado",
+                "Monitor",
+                "Parlante"
+            ]
+        }, 
+        {q:"Salida", 
+            ans:"Monitor", //respuesta correcta
+            opts:[
+                "Monitor",
+                "Mouse",
+                "Microfono"
+            ]
+        }, 
+        {q:"Cerebro PC", 
+            ans:"CPU", //respuesta correcta
+            opts:[
+                "CPU",
+                "RAM",
+                "Disco"
+            ]
+        }
+        //ACA SEGUI AGREGANDO
     ];
+    const DB_INGLES = [{q:"Red", ans:"Rojo", opts:["Rojo","Azul","Verde"]}, {q:"Blue", ans:"Azul", opts:["Azul","Rojo","Amarillo"]}, {q:"Dog", ans:"Perro", opts:["Perro","Gato","Pato"]}, {q:"Cat", ans:"Gato", opts:["Gato","Perro","Vaca"]}];
 
     const DEFAULT_SHOP = [
         {id:'t1', name:'Camisa Steve', type:'torso', color:'#29b6f6', price:0},
@@ -283,24 +456,36 @@
 
     let player = { 
         name: 'Jugador_' + Math.floor(Math.random()*999),
-        grade: 1, coins: 50, 
-        progress: { matematica: 1, compu: 1, teclado: 1, ingles: 1 }, 
+        grade: 'inicial', 
+        coins: 50, 
+        progress: {
+            inicial: { matematica: 1, compu: 1, teclado: 1, ingles: 1 },
+            intermedia: { matematica: 1, compu: 1, teclado: 1, ingles: 1 },
+            dificil: { matematica: 1, compu: 1, teclado: 1, ingles: 1 },
+            experta: { matematica: 1, compu: 1, teclado: 1, ingles: 1 },
+            prodigio: { matematica: 1, compu: 1, teclado: 1, ingles: 1 }
+        },
         inventory: ['t1', 'l1', 'h1'], 
         skin: { head:'#ffcc80', torso:'#29b6f6', legs:'#3f51b5', arm:'#ffcc80' } 
     };
     let localDB = { customLevels: [], shopItems: DEFAULT_SHOP };
-    let currentSession = { subject: null, level: 1, lastWord: '' };
+    let currentSession = { subject: null, level: 1, lastWord: '', startTime: null, backspaces: 0 };
+    let timerInterval = null; 
 
     // 3. INICIO
     window.onload = function() {
-        if(localStorage.getItem('eduPlayer')) player = JSON.parse(localStorage.getItem('eduPlayer'));
+        if(localStorage.getItem('eduPlayer')) {
+            let saved = JSON.parse(localStorage.getItem('eduPlayer'));
+            if(saved.grade === 1 || saved.grade === 7) { 
+                console.log("Reiniciando estructura...");
+            } else {
+                player = saved;
+            }
+        }
         if(localStorage.getItem('eduDB')) localDB = JSON.parse(localStorage.getItem('eduDB'));
         
         document.getElementById('usernameInput').value = player.name;
-        
-        // Asegurar que exista la propiedad ingles si es un jugador viejo
-        if(!player.progress.ingles) player.progress.ingles = 1;
-
+        document.getElementById('gradeSelect').value = player.grade;
         updateUI();
         syncWithCloud();
     };
@@ -350,63 +535,248 @@
     // 4. LÓGICA DE JUEGO
     function playLevel(lvl) {
         currentSession.level = lvl;
+        currentSession.startTime = null; 
+        currentSession.backspaces = 0;   
+        if(timerInterval) clearInterval(timerInterval);
+        
         document.getElementById('gameModal').style.display = 'flex';
         const content = document.getElementById('gameContent');
-        document.getElementById('gameTitle').innerText = `Nivel ${lvl}`;
+        document.getElementById('gameTitle').innerText = `Nivel ${lvl} (${player.grade.toUpperCase()})`;
         
         const custom = localDB.customLevels.find(l => l.grade == player.grade && l.subject === currentSession.subject && l.level == lvl);
-        if(custom) renderQuestion(content, custom.question, custom.answer, custom.options);
-        else generateLevel(content, currentSession.subject, lvl);
+        if(custom) {
+            renderQuestion(content, custom.question, custom.answer, custom.options);
+        } else {
+            generateProceduralLevel(content, currentSession.subject, lvl);
+        }
     }
 
-    function generateLevel(container, subj, lvl) {
+    function generateProceduralLevel(container, subj, lvl) {
         let q, ans, opts;
 
-        // --- TYPING ---
+        // --- TECLADO ---
         if (subj === 'teclado') {
             let target = "", prompt = "", showStats = false;
-            
-            if (player.grade <= 3) {
-                if(lvl <= 20) { target = DB_CHARS[Math.floor(Math.random()*DB_CHARS.length)]; prompt = "Tecla:"; }
-                else if(lvl <= 40) { target = DB_SIMPLE[Math.floor(Math.random()*DB_SIMPLE.length)]; prompt = "Palabra:"; }
-                else { target = DB_SHORT[Math.floor(Math.random()*DB_SHORT.length)]; prompt = "Oración:"; }
-            } else {
-                if(lvl <= 10) { target = DB_DICT[Math.floor(Math.random()*DB_DICT.length)]; prompt = "Escribe:"; }
-                else if(lvl <= 30) { target = DB_COMPLEX[Math.floor(Math.random()*DB_COMPLEX.length)]; prompt = "Escribe:"; }
-                else { target = DB_LONG[Math.floor(Math.random()*DB_LONG.length)]; prompt = "Transcribe:"; showStats=true; }
+            let pool = DB_TECLADO[player.grade]; 
+            // Modo Prodigio: Case Sensitive
+            let isProdigio = player.grade === 'prodigio';
+
+            if(isProdigio) showStats = true;
+
+            // 1. INICIAL
+            if (player.grade === 'inicial') {
+                if(lvl <= 25) { target = getRandom(pool.letras); prompt = "Tecla:"; }
+                else if(lvl <= 40) { target = getRandom(pool.simbolos); prompt = "Símbolo:"; }
+                else { target = getRandom(pool.palabras); prompt = "Palabra:"; }
+            }
+            // 2. INTERMEDIA
+            else if (player.grade === 'intermedia') {
+                if(lvl <= 20) { target = getRandom(pool.palabras); prompt = "Palabra:"; }
+                else if(lvl <= 40) { target = getRandom(pool.tildes); prompt = "Con Tilde:"; }
+                else { target = getRandom(pool.oraciones); prompt = "Oración:"; }
+            }
+            // 3. DIFICIL
+            else if (player.grade === 'dificil') {
+                if(lvl <= 20) { target = getRandom(pool.palabras); prompt = "Palabra Larga:"; }
+                else if(lvl <= 40) { target = getRandom(pool.simbolos); prompt = "Símbolos Caos:"; }
+                else { target = getRandom(pool.codigo); prompt = "Código:"; }
+            }
+            // 4. EXPERTA
+            else if (player.grade === 'experta') {
+                target = getRandom(pool.oraciones); prompt = "Transcribe:";
+            }
+            // 5. PRODIGIO
+            else if (player.grade === 'prodigio') {
+                target = getRandom(pool.textos); prompt = "Transcribe (Contrarreloj):";
             }
             
+            if(!target) target = "HOLA"; 
             ans = target;
+
+            // Estilo del Input: Uppercase automático solo si NO es prodigio
+            let inputStyle = "text-align:center; font-size:1.2rem; width:100%;";
+            if (!isProdigio) inputStyle += " text-transform:uppercase;";
+
             container.innerHTML = `
-                ${showStats ? `<div class="stats-bar"><div class="stats-item">Palabras: <span id="wCounter">0</span></div></div>` : ''}
+                ${showStats ? `
+                <div class="stats-bar">
+                    <div class="stats-item">⏳ <span id="timeCounter">0.0s</span></div>
+                    <div class="stats-item">⌨️ <span id="delCounter" class="stat-danger">0</span></div>
+                    <div class="stats-item">📝 <span id="wCounter">0</span></div>
+                </div>` : ''}
+                
                 <div style="color:#78909c; font-size:0.8rem; margin-bottom:10px;">${prompt}</div>
-                <h3 style="color:#555; font-size:${ans.length>20?'0.8rem':'1.5rem'}">${ans}</h3>
-                <input type="text" id="typingInput" autocomplete="off" style="text-align:center; text-transform:uppercase; font-size:1.2rem; width:100%;">
+                <h3 style="color:#555; font-size:${ans.length>25?'0.7rem':'1.2rem'}">${ans}</h3>
+                
+                <input type="text" id="typingInput" autocomplete="off" style="${inputStyle}">
                 <button class="mc-btn green" style="width:100%; margin-top:15px;" onclick="checkAnswer(document.getElementById('typingInput').value, '${ans}')">Confirmar</button>
             `;
+            
             setTimeout(() => { 
                 const i = document.getElementById('typingInput'); 
-                if(i) { i.focus(); i.onkeydown = (e) => { if(e.key==='Enter') checkAnswer(i.value, ans); };
-                if(showStats) i.oninput = () => { document.getElementById('wCounter').innerText = i.value.trim().split(/\s+/).filter(x=>x).length; }; }
+                if(i) { 
+                    i.focus(); 
+                    
+                    // Lógica del Timer: Solo arranca al escribir
+                    i.oninput = () => { 
+                        if(!currentSession.startTime && showStats) {
+                            currentSession.startTime = new Date();
+                            timerInterval = setInterval(() => {
+                                let now = new Date();
+                                document.getElementById('timeCounter').innerText = ((now - currentSession.startTime)/1000).toFixed(1) + 's';
+                            }, 100);
+                        }
+                        if(showStats) document.getElementById('wCounter').innerText = i.value.trim().split(/\s+/).filter(x=>x).length; 
+                    };
+
+                    i.onkeydown = (e) => { 
+                        if(showStats && e.key === 'Backspace') {
+                            currentSession.backspaces++;
+                            document.getElementById('delCounter').innerText = currentSession.backspaces;
+                        }
+                        if(e.key === 'Enter') checkAnswer(i.value, ans); 
+                    };
+                }
             }, 50);
             return;
         }
 
-        // --- SEPARACIÓN DE TEMAS ---
+        // --- OTRAS MATERIAS ---
         if (subj === 'compu') {
-            const item = DB_COMPUTING[Math.floor(Math.random()*DB_COMPUTING.length)];
+            const item = getRandom(DB_COMPUTING);
             q = item.q; ans = item.ans; opts = item.opts.sort(()=>Math.random()-0.5);
         }
         else if (subj === 'ingles') {
-            const item = DB_ENGLISH[Math.floor(Math.random()*DB_ENGLISH.length)];
+            const item = getRandom(DB_INGLES); 
             q = item.q; ans = item.ans; opts = item.opts.sort(()=>Math.random()-0.5);
         }
-        else { // matematica
-            const max = (player.grade * 10) + (lvl * 5);
-            const a = Math.floor(Math.random()*max), b = Math.floor(Math.random()*max);
-            q = `¿${a} + ${b}?`; ans = a+b; opts = [ans, ans+1, ans-1, ans+5].sort(()=>Math.random()-0.5);
-        }
+        else { //matematica
+            let a, b, opSelector;
+            let range = 10; // Rango base por defecto
 
+            // 1. NIVEL INICIAL (Grados 1-2 aprox)
+            if (player.grade === 'inicial') {
+                opSelector = Math.random();
+                if (opSelector < 0.4) { // Suma (1-20)
+                    a = Math.floor(Math.random() * 20) + 1;
+                    b = Math.floor(Math.random() * 10) + 1;
+                    q = `¿${a} + ${b}?`; ans = a + b;
+                } else if (opSelector < 0.7) { // Resta (Simple, sin negativos)
+                    a = Math.floor(Math.random() * 15) + 5;
+                    b = Math.floor(Math.random() * (a - 1)) + 1;
+                    q = `¿${a} - ${b}?`; ans = a - b;
+                } else if (opSelector < 0.9) { // Multiplicación (Muy básica 1-5)
+                    a = Math.floor(Math.random() * 5) + 1;
+                    b = Math.floor(Math.random() * 3) + 1;
+                    q = `¿${a} x ${b}?`; ans = a * b;
+                } else { // División (Básica: mitad, tercio)
+                    b = Math.floor(Math.random() * 2) + 2; // Divisor 2 o 3
+                    ans = Math.floor(Math.random() * 5) + 1;
+                    a = b * ans; // Asegurar división exacta
+                    q = `¿${a} / ${b}?`;
+                }
+            } 
+            
+            // 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
+            else if (player.grade === 'intermedia') {
+                opSelector = Math.random();
+                if (opSelector < 0.3) { // Suma (Hasta 100)
+                    a = Math.floor(Math.random() * 80) + 10;
+                    b = Math.floor(Math.random() * 50) + 10;
+                    q = `¿${a} + ${b}?`; ans = a + b;
+                } else if (opSelector < 0.6) { // Resta
+                    a = Math.floor(Math.random() * 90) + 10;
+                    b = Math.floor(Math.random() * (a - 5)) + 1;
+                    q = `¿${a} - ${b}?`; ans = a - b;
+                } else if (opSelector < 0.8) { // Multiplicación (Tablas 1-9)
+                    a = Math.floor(Math.random() * 9) + 2;
+                    b = Math.floor(Math.random() * 9) + 2;
+                    q = `¿${a} x ${b}?`; ans = a * b;
+                } else { // División (Tablas exactas)
+                    b = Math.floor(Math.random() * 5) + 2; // Divisor 2-6
+                    ans = Math.floor(Math.random() * 9) + 2;
+                    a = b * ans;
+                    q = `¿${a} / ${b}?`;
+                }
+            }
+
+            // 3. NIVEL DIFICIL (Grados 5-6 aprox)
+            else if (player.grade === 'dificil') {
+                opSelector = Math.random();
+                if (opSelector < 0.3) { // Suma (Centenas)
+                    a = Math.floor(Math.random() * 400) + 100;
+                    b = Math.floor(Math.random() * 400) + 100;
+                    q = `¿${a} + ${b}?`; ans = a + b;
+                } else if (opSelector < 0.6) { // Resta (Centenas)
+                    a = Math.floor(Math.random() * 800) + 100;
+                    b = Math.floor(Math.random() * (a - 50));
+                    q = `¿${a} - ${b}?`; ans = a - b;
+                } else if (opSelector < 0.8) { // Multiplicación (2 cifras x 1 cifra)
+                    a = Math.floor(Math.random() * 15) + 10; // 10-25
+                    b = Math.floor(Math.random() * 8) + 2;   // 2-9
+                    q = `¿${a} x ${b}?`; ans = a * b;
+                } else { // División
+                    b = Math.floor(Math.random() * 8) + 2;
+                    ans = Math.floor(Math.random() * 20) + 5;
+                    a = b * ans;
+                    q = `¿${a} / ${b}?`;
+                }
+            }
+
+            // 4. NIVEL EXPERTA (Grado 7)
+            else if (player.grade === 'experta') {
+                opSelector = Math.random();
+                if (opSelector < 0.25) { // Suma (Miles)
+                    a = Math.floor(Math.random() * 2000) + 500;
+                    b = Math.floor(Math.random() * 2000) + 500;
+                    q = `¿${a} + ${b}?`; ans = a + b;
+                } else if (opSelector < 0.5) { // Resta
+                    a = Math.floor(Math.random() * 3000) + 1000;
+                    b = Math.floor(Math.random() * (a - 100));
+                    q = `¿${a} - ${b}?`; ans = a - b;
+                } else if (opSelector < 0.75) { // Multiplicación (Compleja)
+                    a = Math.floor(Math.random() * 50) + 10;
+                    b = Math.floor(Math.random() * 9) + 2;
+                    q = `¿${a} x ${b}?`; ans = a * b;
+                } else { // División
+                    b = Math.floor(Math.random() * 9) + 3;
+                    ans = Math.floor(Math.random() * 50) + 10;
+                    a = b * ans;
+                    q = `¿${a} / ${b}?`;
+                }
+            }
+
+            // 5. NIVEL PRODIGIO (Desafío Total)
+            else if (player.grade === 'prodigio') {
+                opSelector = Math.random();
+                if (opSelector < 0.25) { // Suma Gigante
+                    a = Math.floor(Math.random() * 9000) + 1000;
+                    b = Math.floor(Math.random() * 9000) + 1000;
+                    q = `¿${a} + ${b}?`; ans = a + b;
+                } else if (opSelector < 0.5) { // Resta Gigante
+                    a = Math.floor(Math.random() * 10000) + 5000;
+                    b = Math.floor(Math.random() * 4000) + 1000;
+                    q = `¿${a} - ${b}?`; ans = a - b;
+                } else if (opSelector < 0.75) { // Multiplicación (2 cifras x 2 cifras)
+                    a = Math.floor(Math.random() * 20) + 10; // 10-30
+                    b = Math.floor(Math.random() * 20) + 10; // 10-30
+                    q = `¿${a} x ${b}?`; ans = a * b;
+                } else { // División (Números grandes)
+                    b = Math.floor(Math.random() * 15) + 5; // Divisor 5-20
+                    ans = Math.floor(Math.random() * 30) + 10;
+                    a = b * ans;
+                    q = `¿${a} / ${b}?`;
+                }
+            }
+
+            // Generar opciones incorrectas inteligentes (cercanas al resultado)
+            opts = [
+                ans,
+                ans + Math.floor(Math.random() * 5) + 1,
+                ans - Math.floor(Math.random() * 5) - 1,
+                ans + 10
+            ].sort(() => Math.random() - 0.5);
+        }
         let html = `<h2 style="color:#455a64; margin-bottom:30px;">${q}</h2><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">`;
         opts.forEach(opt => { html += `<button class="mc-btn blue" onclick="checkAnswer('${opt}','${ans}')">${opt}</button>`; });
         html += `</div>`;
@@ -414,36 +784,57 @@
     }
 
     function checkAnswer(user, correct) {
-        if (String(user).toUpperCase().trim() === String(correct).toUpperCase().trim()) {
+        let isCorrect = false;
+        
+        // Validación Prodigio: Case Sensitive
+        if (player.grade === 'prodigio' && currentSession.subject === 'teclado') {
+            // Comparación estricta
+            if (String(user).trim() === String(correct).trim()) {
+                isCorrect = true;
+            }
+        } else {
+            // Comparación normal (Mayúsculas ignoradas)
+            if (String(user).toUpperCase().trim() === String(correct).toUpperCase().trim()) {
+                isCorrect = true;
+            }
+        }
+
+        if (isCorrect) {
             player.coins += 20;
-            if(currentSession.level === player.progress[currentSession.subject]) player.progress[currentSession.subject]++;
+            // ACTUALIZAR PROGRESO DEL GRADO ACTUAL
+            if(currentSession.level === player.progress[player.grade][currentSession.subject]) {
+                player.progress[player.grade][currentSession.subject]++;
+            }
             saveData(); updateUI(); showToast("¡Correcto! +20 🪙");
-            setTimeout(() => { if(currentSession.level < 50) playLevel(currentSession.level + 1); else closeGame(); }, 800);
+            
+            if(timerInterval) clearInterval(timerInterval); // Parar timer
+
+            setTimeout(() => { if(currentSession.level < 60) playLevel(currentSession.level + 1); else closeGame(); }, 800);
         } else {
             player.coins = Math.max(0, player.coins - 10);
             saveData(); updateUI(); showToast("Incorrecto -10 🪙", 'error');
         }
     }
 
-    // 5. UTILS Y RENDERIZADO
+    function getRandom(arr) { if(!arr || arr.length===0) return "X"; return arr[Math.floor(Math.random() * arr.length)]; }
+
     function applyTexture(elementId, value) {
         const el = document.getElementById(elementId);
         if(!el) return;
         if(value && (value.startsWith('http') || value.startsWith('data:image'))) {
-            el.style.backgroundColor = 'transparent';
-            el.style.backgroundImage = `url('${value}')`;
+            el.style.backgroundColor = 'transparent'; el.style.backgroundImage = `url('${value}')`;
         } else {
-            el.style.backgroundImage = 'none';
-            el.style.backgroundColor = value;
+            el.style.backgroundImage = 'none'; el.style.backgroundColor = value;
         }
     }
 
     function updateUI() {
         document.getElementById('uiCoins').innerText = player.coins;
-        document.getElementById('lbl-math').innerText = player.progress.matematica;
-        document.getElementById('lbl-logic').innerText = player.progress.compu;
-        document.getElementById('lbl-typing').innerText = player.progress.teclado;
-        document.getElementById('lbl-ingles').innerText = player.progress.ingles;
+        const p = player.progress[player.grade];
+        document.getElementById('lbl-math').innerText = p.matematica;
+        document.getElementById('lbl-logic').innerText = p.compu;
+        document.getElementById('lbl-typing').innerText = p.teclado;
+        document.getElementById('lbl-ingles').innerText = p.ingles;
         
         applyTexture('avHead', player.skin.head || '#ffcc80');
         applyTexture('avTorso', player.skin.torso);
@@ -454,7 +845,11 @@
     }
 
     function updateUsername(val) { player.name = val; saveData(); }
-    function changeGrade() { player.grade = parseInt(document.getElementById('gradeSelect').value); showToast(`Grado ${player.grade}`); }
+    function changeGrade() { 
+        player.grade = document.getElementById('gradeSelect').value; 
+        updateUI(); 
+        showToast(`Dificultad: ${player.grade.toUpperCase()}`); 
+    }
     function showToast(msg, type='success') {
         const t = document.createElement('div'); t.className = `toast ${type}`;
         t.innerHTML = `<span>${type=='success'?'✅':'❌'}</span><span>${msg}</span>`;
@@ -466,12 +861,12 @@
     function showShop() { setView('view-shop'); renderShop(); }
     function openSubject(s) { currentSession.subject = s; setView('view-map'); document.getElementById('mapTitle').innerText = s.toUpperCase(); renderMap(); }
     function setView(id) { ['view-dashboard','view-map','view-shop'].forEach(v => document.getElementById(v).style.display = 'none'); document.getElementById(id).style.display = 'block'; }
-    function closeGame() { document.getElementById('gameModal').style.display = 'none'; renderMap(); }
+    function closeGame() { document.getElementById('gameModal').style.display = 'none'; if(timerInterval) clearInterval(timerInterval); renderMap(); }
 
     function renderMap() {
         const grid = document.getElementById('mapGrid'); grid.innerHTML = '';
-        const cur = player.progress[currentSession.subject];
-        for(let i=1; i<=50; i++) {
+        const cur = player.progress[player.grade][currentSession.subject];
+        for(let i=1; i<=60; i++) {
             const btn = document.createElement('div'); btn.className = 'level-block'; btn.innerText = i;
             if(i<cur) { btn.classList.add('completed'); btn.onclick = () => playLevel(i); }
             else if(i===cur) { btn.classList.add('current'); btn.onclick = () => playLevel(i); }
@@ -484,16 +879,26 @@
         const g = document.getElementById('shopGrid'); g.innerHTML = '';
         localDB.shopItems.forEach(it => {
             const owned = player.inventory.includes(it.id);
-            const d = document.createElement('div'); d.className = 'panel'; d.style.textAlign='center';
-            
+            const d = document.createElement('div'); 
+            d.className = 'panel'; 
+            d.style.textAlign='center';
             let bgStyle = it.color.startsWith('http') ? `background-image:url('${it.color}'); background-size:cover;` : `background:${it.color};`;
-            
-            d.innerHTML = `<div style="width:40px;height:40px;${bgStyle} margin:0 auto 10px;border:2px solid #000;"></div>
-                           <b>${it.name}</b><br><span style="font-size:0.6rem; color:#666">${it.type}</span><br>
-                           <small>${owned?'Tuyo':it.price}</small>`;
+            d.innerHTML = `<div style="width:40px;height:40px;${bgStyle} margin:0 auto 10px;border:2px solid #000;"></div><b>${it.name}</b><br><span style="font-size:0.6rem; color:#666">${it.type}</span><br><small>${owned?'Tuyo':it.price}</small>`;
             d.onclick = () => {
-                if(owned) { player.skin[it.type] = it.color; saveData(); updateUI(); showToast("Equipado"); }
-                else if(player.coins >= it.price) { player.coins -= it.price; player.inventory.push(it.id); player.skin[it.type] = it.color; saveData(); updateUI(); renderShop(); showToast("Comprado"); }
+                if(owned) { 
+                    player.skin[it.type] = it.color; 
+                    saveData(); 
+                    updateUI(); 
+                    showToast("Equipado"); 
+                }
+                else if(player.coins >= it.price) { 
+                    player.coins -= it.price; player.inventory.push(it.id); 
+                    player.skin[it.type] = it.color; 
+                    saveData(); 
+                    updateUI(); 
+                    renderShop(); 
+                    showToast("Comprado"); 
+                }
                 else showToast("Faltan Monedas", 'error');
             };
             g.appendChild(d);
@@ -513,7 +918,7 @@
         const g=document.getElementById('admGrade').value, s=document.getElementById('admSubj').value, l=document.getElementById('admLvlNum').value;
         const q=document.getElementById('admQ').value, a=document.getElementById('admAns').value, o=document.getElementById('admOpts').value;
         if(!l||!q||!a) return showToast("Faltan Datos",'error');
-        localDB.customLevels.push({ grade: parseInt(g), subject: s, level: parseInt(l), question: q, answer: a, options: o });
+        localDB.customLevels.push({ grade: g, subject: s, level: parseInt(l), question: q, answer: a, options: o });
         saveData(); showToast("Nivel Guardado");
     }
     
@@ -526,7 +931,4 @@
 </script>
 
 </body>
-
 </html>
-
-
