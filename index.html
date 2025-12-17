@@ -21,7 +21,19 @@
             --btn-red: #ef5350; 
             --stone: #90a4ae;
             --gold: #ffd700; 
-            ----btn-pink: #e368e7;}
+            ----btn-pink: #e368e7;
+
+            --btn-orange: #eda200; 
+            ----btn-cian: #0be0c8; 
+            ----btn-amarillo: #d0f018;
+            ----btn-azul: #151fd5;
+            ----btn-verde: #022b00; 
+            ----btn-bordo: #530000;}  
+
+
+
+
+
         * { box-sizing: border-box; }
         body { font-family: 'Press Start 2P', cursive; background-color: var(--sky); background-image: radial-gradient(#b2ebf2 15%, transparent 16%), radial-gradient(#b2ebf2 15%, transparent 16%); background-size: 30px 30px; color: var(--text); margin: 0; padding: 20px; user-select: none; line-height: 1.5; }
         .app-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 320px; gap: 20px; }
@@ -35,6 +47,15 @@
         .mc-btn.red { background-color: var(--btn-red); border-color: #c62828; } 
         .mc-btn.gray { background-color: var(--stone); border-color: #546e7a; }
         .mc-btn.pink { background-color: var(----btn-pink); border-color: #e368e7; }
+        
+        .mc-btn.orange { background-color: var(--btn-orange); border-color: #eda200; }
+        .mc-btn.cian { background-color: var(----btn-cian); border-color: #0be0c8; }
+        .mc-btn.amarillo { background-color: var(----btn-amarillo); border-color: #d0f018; }
+        .mc-btn.azul { background-color: var(----btn-azul); border-color: #151fd5; }
+        .mc-btn.verde { background-color: var(----btn-verde); border-color: #022b00; }
+        .mc-btn.bordo { background-color: var(----btn-bordo); border-color: #530000; }
+
+
 
         .avatar-container { display: flex; flex-direction: column; align-items: center; gap: 2px; transform: scale(1.8); margin: 40px 0; }
         .mc-part { border: 2px solid #000; background-size: cover !important; background-position: center !important; image-rendering: pixelated; position: relative; }
@@ -135,37 +156,37 @@
                     <small>Nivel <span id="lbl-ingles">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('Logica')" style="height:120px;">
+                <button class="mc-btn orange" onclick="openSubject('Logica')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🧠</div>
                     Logica<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('Algoritmos')" style="height:120px;">
+                <button class="mc-btn cian" onclick="openSubject('Algoritmos')" style="height:120px;">
                     <div style="font-size:1rem; margin-bottom:10px;">✎ᝰ.</div>
                     Algoritmos<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('ciudadania_dig')" style="height:120px;">
+                <button class="mc-btn amarillo" onclick="openSubject('ciudadania_dig')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🫂</div>
                     Ciudadania digital<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('Geografia')" style="height:120px;">
+                <button class="mc-btn azul" onclick="openSubject('Geografia')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🌏 </div>
                     Geografia<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
                 
-                <button class="mc-btn pink" onclick="openSubject('astronomia')" style="height:120px;">
+                <button class="mc-btn verde" onclick="openSubject('astronomia')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🔭</div>
                     Astronomia<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('geometria')" style="height:120px;">
+                <button class="mc-btn bordo" onclick="openSubject('geometria')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">📐</div>
                     Geometria<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
@@ -1074,4 +1095,3 @@
 </body>
 
 </html>
-
