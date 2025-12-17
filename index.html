@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web de juegos para niños</title>
+    <title>eL DESARROLLO</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -97,7 +97,7 @@
             </div>
             <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
                 <button class="mc-btn blue" onclick="showDashboard()"> 🎮JUEGOS</button>
-                <button class="mc-btn green" onclick="showShop()">🛍️ Tienda<br><br> (en DESARROLLO) </button>
+                <button class="mc-btn green" onclick="showShop()">🛍️ Tienda<br><br> (en DESARROLLO)</button>
             </div>
             <div style="margin-top: 30px; border-top: 2px dashed #90a4ae; padding-top: 10px;">
                 <div class="admin-tag" onclick="openAdminLogin()">Administrador</div>
@@ -112,7 +112,7 @@
             <div class="subject-grid">
 
                 <button class="mc-btn blue" onclick="openSubject('matematica')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">📐</div>
+                    <div style="font-size:2rem; margin-bottom:10px;">🧮</div>
                     Matemática<br><br>
                     <small>Nivel <span id="lbl-math">1</span></small>
                 </button>
@@ -130,16 +130,48 @@
                 </button>
 
                 <button class="mc-btn purple" onclick="openSubject('ingles')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">🇺🇸</div>
+                    <div style="font-size:2rem; margin-bottom:10px;">🗣️</div>
                     Ingles <br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-ingles">1</span></small>
                 </button>
 
-                <button class="mc-btn pink" onclick="openSubject('produccion')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">⚠️</div>
-                    En produccion<br><br>
+                <button class="mc-btn pink" onclick="openSubject('Logica')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🧠</div>
+                    Logica<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-produc">1</span></small>
                 </button>
+
+                <button class="mc-btn pink" onclick="openSubject('Algoritmos')" style="height:120px;">
+                    <div style="font-size:1rem; margin-bottom:10px;">✎ᝰ.</div>
+                    Algoritmos<br><br>(en DESARROLLO)<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+
+                <button class="mc-btn pink" onclick="openSubject('ciudadania_dig')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🫂</div>
+                    Ciudadania digital<br><br>(en DESARROLLO)<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+
+                <button class="mc-btn pink" onclick="openSubject('Geografia')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🌏 </div>
+                    Geografia<br><br>(en DESARROLLO)<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+                
+                <button class="mc-btn pink" onclick="openSubject('astronomia')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🔭</div>
+                    Astronomia<br><br>(en DESARROLLO)<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+
+                <button class="mc-btn pink" onclick="openSubject('geometria')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">📐</div>
+                    Geometria<br><br>(en DESARROLLO)<br><br>
+                    <small>Nivel <span id="lbl-produc">1</span></small>
+                </button>
+                
+                
 
             </div>
         </div>
@@ -214,7 +246,11 @@
                 <option value="compu">Computación</option>
                 <option value="ingles">Ingles</option>
                 <option value="teclado">Teclado</option>
+                <option value="Logica">Logica</option>
+                <option value="Algoritmos">Algoritmos</option>
+                <option value="ciudadania_dig">ciudadania digital</option>
                 <option value="produccion">En Producción</option>
+
             </select>
             <select id="admGrade">
                 <option value="inicial">Inicial</option>
@@ -398,8 +434,13 @@
             ]
         }
     };
-
-    // OTROS DATOS
+    const DB_LOGICA = [
+        //LOGICA DE PROGRAMACION Y PASO A PASO
+    ];
+     const DB_ALGORITMO= [
+        //LOGICA DE ALGORITMOS Y SUS USOS
+    ];
+   // OTROS DATOS
     const DB_COMPUTING = [
         {q:"¿Hardware?", 
             ans:"Fisico", //respuesta correcta
@@ -442,8 +483,34 @@
             ]
         }
         //ACA SEGUI AGREGANDO
+      /*
+            //1. NIVEL INICIAL (Grados 1-2 aprox)
+            if (player.grade === 'inicial') {
+                
+            } 
+            
+            // 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
+            else if (player.grade === 'intermedia') {
+                
+            }
+
+            // 3. NIVEL DIFICIL (Grados 5-6 aprox)
+            else if (player.grade === 'dificil') {
+               
+            }
+
+            // 4. NIVEL EXPERTA (Grado 7)
+            else if (player.grade === 'experta') {
+                
+            }
+
+            // 5. NIVEL PRODIGIO (Desafío Total)
+            else if (player.grade === 'prodigio') {
+                
+            }
+        */
     ];
-    const DB_INGLES = [
+    const DB_INGLES = [  //VARIABLE PARA POST LLAMADO
         {q:"Red", 
             ans:"Rojo", 
             opts:[
@@ -477,6 +544,40 @@
             ]
         }
         //ACA SEGUI AGREGANDO
+/*
+ // 1. NIVEL INICIAL (Grados 1-2 aprox)
+            if (player.grade === 'inicial') {
+                
+            } 
+            
+            // 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
+            else if (player.grade === 'intermedia') {
+                
+            }
+
+            // 3. NIVEL DIFICIL (Grados 5-6 aprox)
+            else if (player.grade === 'dificil') {
+               
+            }
+
+            // 4. NIVEL EXPERTA (Grado 7)
+            else if (player.grade === 'experta') {
+                
+            }
+
+            // 5. NIVEL PRODIGIO (Desafío Total)
+            else if (player.grade === 'prodigio') {
+                
+            }
+*/
+
+
+
+
+
+
+
+
     ];
 
     const DEFAULT_SHOP = [
@@ -942,7 +1043,7 @@
     // ADMIN
     function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
     function checkAdmin() { 
-        if(document.getElementById('adminUser').value==='admin' && document.getElementById('adminPass').value==='minecraft') {
+        if(document.getElementById('adminUser').value==='admin' && document.getElementById('adminPass').value==='admin') {
             document.getElementById('adminLoginModal').style.display='none'; document.getElementById('adminPanelModal').style.display='flex';
         } else showToast("Error", 'error');
     }
@@ -973,4 +1074,3 @@
 </body>
 
 </html>
-
