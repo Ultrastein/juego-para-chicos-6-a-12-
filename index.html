@@ -119,7 +119,7 @@
 
                 <button class="mc-btn green" onclick="openSubject('compu')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🤖</div>
-                    Computación<br><br>
+                    Computación<br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-logic">1</span></small>
                 </button>
 
@@ -131,7 +131,7 @@
 
                 <button class="mc-btn purple" onclick="openSubject('ingles')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🇺🇸</div>
-                    Ingles<br><br>
+                    Ingles <br><br>(en DESARROLLO)<br><br>
                     <small>Nivel <span id="lbl-ingles">1</span></small>
                 </button>
 
@@ -443,7 +443,41 @@
         }
         //ACA SEGUI AGREGANDO
     ];
-    const DB_INGLES = [{q:"Red", ans:"Rojo", opts:["Rojo","Azul","Verde"]}, {q:"Blue", ans:"Azul", opts:["Azul","Rojo","Amarillo"]}, {q:"Dog", ans:"Perro", opts:["Perro","Gato","Pato"]}, {q:"Cat", ans:"Gato", opts:["Gato","Perro","Vaca"]}];
+    const DB_INGLES = [
+        {q:"Red", 
+            ans:"Rojo", 
+            opts:[
+                "Rojo",
+                "Azul",
+                "Verde"
+            ]
+        }, 
+        {q:"Blue", 
+            ans:"Azul", 
+            opts:[
+                "Azul",
+                "Rojo",
+                "Amarillo"
+            ]
+        }, 
+        {q:"Dog", 
+            ans:"Perro", 
+            opts:[
+                "Perro",
+                "Gato",
+                "Pato"
+            ]
+        }, 
+        {q:"Cat", 
+            ans:"Gato", 
+            opts:[
+                "Gato",
+                "Perro",
+                "Vaca"
+            ]
+        }
+        //ACA SEGUI AGREGANDO
+    ];
 
     const DEFAULT_SHOP = [
         {id:'t1', name:'Camisa Steve', type:'torso', color:'#29b6f6', price:0},
@@ -451,7 +485,7 @@
         {id:'h1', name:'Piel Base', type:'head', color:'#ffcc80', price:0},
         {id:'t2', name:'Camisa Creeper', type:'torso', color:'https://i.imgur.com/u3l2j1S.png', price:100},
         {id:'h2', name:'Cara Zombie', type:'head', color:'#66bb6a', price:150},
-        {id:'t3', name:'Oro Puro', type:'torso', color:'#fbc02d', price:200}
+        {id:'t3', name:'Oro Puro', type:'torso', color:'#fbc02d', price:200},
     ];
 
     let player = { 
@@ -928,7 +962,14 @@
         localDB.shopItems.push({ id: 'c_'+Date.now(), name: n, price: parseInt(p), type: t, color: c });
         saveData(); showToast("Item Creado");
     }
+
+
+
+
+
+    
 </script>
 
 </body>
+
 </html>
