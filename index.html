@@ -3,90 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📖juegos a aprender📖</title>
+    <title>📖juegos a aprender📖 (local)</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    <style>
-        /* ESTILOS (Idénticos) */
-        :root { 
-            --sky: #e0f7fa; 
-            --cloud: #ffffff; 
-            --text: #37474f; 
-            --btn-green: #66bb6a; 
-            --btn-blue: #42a5f5; 
-            --btn-purple: #ab47bc; 
-            --btn-red: #ef5350; 
-            --stone: #90a4ae;
-            --gold: #ffd700; 
-            ----btn-pink: #e368e7;
-
-            --btn-orange: #eda200; 
-            ----btn-cian: #0be0c8; 
-            ----btn-amarillo: #d0f018;
-            ----btn-azul: #151fd5;
-            ----btn-verde: #022b00; 
-            ----btn-bordo: #530000;}  
-
-
-
-
-
-        * { box-sizing: border-box; }
-        body { font-family: 'Press Start 2P', cursive; background-color: var(--sky); background-image: radial-gradient(#b2ebf2 15%, transparent 16%), radial-gradient(#b2ebf2 15%, transparent 16%); background-size: 30px 30px; color: var(--text); margin: 0; padding: 20px; user-select: none; line-height: 1.5; }
-        .app-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr 320px; gap: 20px; }
-        header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
-        .panel { background: var(--cloud); border: 4px solid #37474f; padding: 20px; margin-bottom: 20px; box-shadow: 6px 6px 0px rgba(0,0,0,0.1); }
-        .mc-btn { color: #fff; border: 4px solid; padding: 15px; font-family: 'Press Start 2P', cursive; font-size: 0.7rem; cursor: pointer; text-transform: uppercase; box-shadow: inset -4px -4px 0px 0px rgba(0,0,0,0.2); position: relative; transition: transform 0.1s; }
-        .mc-btn:active { transform: translateY(4px); box-shadow: inset -2px -2px 0px 0px rgba(0,0,0,0.2); }
-        .mc-btn.green { background-color: var(--btn-green); border-color: #2e7d32; } 
-        .mc-btn.blue { background-color: var(--btn-blue); border-color: #1565c0; } 
-        .mc-btn.purple { background-color: var(--btn-purple); border-color: #7b1fa2; } 
-        .mc-btn.red { background-color: var(--btn-red); border-color: #c62828; } 
-        .mc-btn.gray { background-color: var(--stone); border-color: #546e7a; }
-        .mc-btn.pink { background-color: var(----btn-pink); border-color: #e368e7; }
-        
-        .mc-btn.orange { background-color: var(--btn-orange); border-color: #eda200; }
-        .mc-btn.cian { background-color: var(----btn-cian); border-color: #0be0c8; }
-        .mc-btn.amarillo { background-color: var(----btn-amarillo); border-color: #d0f018; }
-        .mc-btn.azul { background-color: var(----btn-azul); border-color: #151fd5; }
-        .mc-btn.verde { background-color: var(----btn-verde); border-color: #022b00; }
-        .mc-btn.bordo { background-color: var(----btn-bordo); border-color: #530000; }
-
-
-
-        .avatar-container { display: flex; flex-direction: column; align-items: center; gap: 2px; transform: scale(1.8); margin: 40px 0; }
-        .mc-part { border: 2px solid #000; background-size: cover !important; background-position: center !important; image-rendering: pixelated; position: relative; }
-        .mc-head { width: 40px; height: 40px; background: #ffcc80; z-index: 5; }
-        .mc-eyes { display: flex; gap: 14px; position: absolute; top: 15px; left: 6px; pointer-events: none; }
-        .eye { width: 6px; height: 6px; background: white; border: 1px solid black; } .pupil { width: 3px; height: 3px; background: black; margin-left: 2px; margin-top: 1px; }
-        .mc-body-row { display: flex; gap: 2px; z-index: 4; } .mc-arm { width: 12px; height: 40px; background: #ffcc80; margin-top: 0; } .mc-torso { width: 40px; height: 40px; background: #29b6f6; }
-        .mc-legs-row { display: flex; gap: 2px; z-index: 3; } .mc-leg { width: 18px; height: 40px; background: #3f51b5; }
-        .leaderboard-list { display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; }
-        .leaderboard-row { display: flex; align-items: center; gap: 10px; background: #eceff1; padding: 8px; border: 2px solid #b0bec5; font-size: 0.6rem; }
-        .leaderboard-row.top-1 { border-color: var(--gold); background: #fffde7; }
-        .mini-avatar-box { transform: scale(0.5); width: 45px; height: 70px; margin: -20px -5px; } 
-        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .level-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .level-block { width: 45px; height: 45px; background: #cfd8dc; border: 4px solid #90a4ae; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #546e7a; font-weight: bold; font-size: 0.8rem; }
-        .level-block.locked { opacity: 0.5; cursor: not-allowed; background: #eceff1; }
-        .level-block.completed { background: var(--btn-green); border-color: #2e7d32; color: white; }
-        .level-block.current { background: white; border-color: var(--btn-blue); color: var(--btn-blue); transform: scale(1.1); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input, select { padding: 12px; margin: 5px 0; width: 100%; font-family: 'Press Start 2P'; border: 2px solid #90a4ae; background: #eceff1; color: #37474f; outline: none; }
-        .stats-bar { display: flex; justify-content: space-around; background: #263238; color: #4caf50; padding: 10px; border: 2px solid #000; margin-bottom: 15px; font-size: 0.7rem; }
-        .stats-item span { color: #ffeb3b; }
-        .stat-danger { color: #ef5350 !important; }
-        #notification-area { position: fixed; top: 20px; right: 20px; z-index: 2000; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: #333; color: #fff; padding: 15px 20px; border: 4px solid #fff; font-size: 0.7rem; display: flex; align-items: center; gap: 10px; box-shadow: 4px 4px 0px rgba(0,0,0,0.2); animation: slideIn 0.3s forwards, fadeOut 0.5s 3s forwards; min-width: 250px; }
-        .toast.success { background: var(--btn-green); border-color: #1b5e20; } .toast.error { background: var(--btn-red); border-color: #b71c1c; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 100; justify-content: center; align-items: center; }
-        .modal-box { background: var(--cloud); padding: 20px; border: 4px solid #37474f; width: 95%; max-width: 700px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; pointer-events: none; } }
-        .admin-tag { font-size: 0.6rem; color: #90a4ae; margin-top: 15px; cursor: pointer; text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!--incorporamos css-->
 </head>
 <body>
 
@@ -94,7 +17,7 @@
 
 <div class="app-container">
     <header class="panel">
-        <div><h1 style="margin:0; color:#0277bd; font-size:1.5rem;">Web de juegos <h1></div>
+        <div><h1 style="margin:0; color:#0277bd; font-size:1.5rem;">Web de juegos (local)</h1></div>
         <div style="text-align:right">
             <div style="color:#fbc02d; font-size:1.2rem; margin-bottom:5px;">🪙 <span id="uiCoins">0</span></div>
             <select id="gradeSelect" onchange="changeGrade()" style="width:auto; font-size:0.6rem; padding:5px;">
@@ -138,7 +61,7 @@
                     <small>Nivel <span id="lbl-math">1</span></small>
                 </button>
 
-                <button class="mc-btn green" onclick="openSubject('Computación-programación')" style="height:120px;">
+                <button class="mc-btn green" onclick="openSubject('compu')" style="height:120px;">
                     <div style="font-size:2rem; margin-bottom:10px;">🤖</div>
                     Computación<br><br>
                     <small>Nivel <span id="lbl-logic">1</span></small>
@@ -156,43 +79,11 @@
                     <small>Nivel <span id="lbl-ingles">1</span></small>
                 </button>
 
-                <button class="mc-btn orange" onclick="openSubject('Logica')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">🧠</div>
-                    Logica<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
+                <button class="mc-btn pink" onclick="openSubject('claves')" style="height:120px;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🔐</div>
+                    Claves<br><br>
+                    <small>Herramienta</small>
                 </button>
-
-                <button class="mc-btn cian" onclick="openSubject('Algoritmos')" style="height:120px;">
-                    <div style="font-size:1rem; margin-bottom:10px;">✎ᝰ.</div>
-                    Algoritmos<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
-                </button>
-
-                <button class="mc-btn amarillo" onclick="openSubject('ciudadania_dig')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">🫂</div>
-                    Ciudadania digital<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
-                </button>
-
-                <button class="mc-btn azul" onclick="openSubject('Geografia')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">🌏 </div>
-                    Geografia<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
-                </button>
-                
-                <button class="mc-btn verde" onclick="openSubject('astronomia')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">🔭</div>
-                    Astronomia<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
-                </button>
-
-                <button class="mc-btn bordo" onclick="openSubject('geometria')" style="height:120px;">
-                    <div style="font-size:2rem; margin-bottom:10px;">📐</div>
-                    Geometria<br><br>(en DESARROLLO)<br><br>
-                    <small>Nivel <span id="lbl-produc">1</span></small>
-                </button>
-                
-                
 
             </div>
         </div>
@@ -206,7 +97,7 @@
         <div id="view-shop" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
                 <h3 style="margin:0;">Tienda</h3>
-                <button class="mc-btn gray" onclick="showDashboard()">← Salir</button>
+                <button class="mc-btn gray" onclick="showDashboard()">← salir</button>
             </div>
             <div class="subject-grid" id="shopGrid"></div>
         </div>
@@ -226,13 +117,13 @@
     <div class="modal-box">
         <h3 id="gameTitle" style="color:#0277bd;">Nivel 1</h3>
         <div id="gameContent" style="margin:30px 0;"></div>
-        <button class="mc-btn red" onclick="closeGame()">Salir</button>
+        <button class="mc-btn red" onclick="closeGame()">salir</button>
     </div>
 </div>
 
 <div class="overlay" id="adminLoginModal" style="display:none;">
     <div class="modal-box" style="width:400px;">
-        <h3>Zona Developers</h3>
+        <h3>ADMINISTRADORES</h3>
         <input type="text" id="adminUser" placeholder="Usuario">
         <input type="password" id="adminPass" placeholder="Contraseña">
         <div style="display:flex; gap:10px; margin-top:10px;">
@@ -267,15 +158,6 @@
                 <option value="compu">Computación</option>
                 <option value="ingles">Ingles</option>
                 <option value="teclado">Teclado</option>
-                <option value="Logica">Logica</option>
-                <option value="Algoritmos">Algoritmos</option>
-                <option value="ciudadania_dig">ciudadania digital</option>
-                <option value="produccion">En Producción</option>
-                <option value="Geografia">Geografia</option>
-                <option value="Astronomia">Astronomia</option>
-                <option value="Geometria">Geometria</option>
-
-
             </select>
             <select id="admGrade">
                 <option value="inicial">Inicial</option>
@@ -593,41 +475,6 @@
                 "Vaca"
             ]
         }
-        //ACA SEGUI AGREGANDO
-/*
- // 1. NIVEL INICIAL (Grados 1-2 aprox)
-            if (player.grade === 'inicial') {
-                
-            } 
-            
-            // 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
-            else if (player.grade === 'intermedia') {
-                
-            }
-
-            // 3. NIVEL DIFICIL (Grados 5-6 aprox)
-            else if (player.grade === 'dificil') {
-               
-            }
-
-            // 4. NIVEL EXPERTA (Grado 7)
-            else if (player.grade === 'experta') {
-                
-            }
-
-            // 5. NIVEL PRODIGIO (Desafío Total)
-            else if (player.grade === 'prodigio') {
-                
-            }
-    */
-
-
-
-
-
-
-
-
     ];
 
     const DEFAULT_SHOP = [
@@ -637,6 +484,7 @@
         {id:'t2', name:'Camisa Creeper', type:'torso', color:'https://i.imgur.com/u3l2j1S.png', price:100},
         {id:'h2', name:'Cara Zombie', type:'head', color:'#66bb6a', price:150},
         {id:'t3', name:'Oro Puro', type:'torso', color:'#fbc02d', price:200},
+
     ];
 
     let player = { 
@@ -644,11 +492,11 @@
         grade: 'inicial', 
         coins: 50, 
         progress: {
-            inicial: { matematica: 1, compu: 1, teclado: 1, ingles: 1, geografia: 1 },
-            intermedia: { matematica: 1, compu: 1, teclado: 1, ingles: 1, geografia: 1 },
-            dificil: { matematica: 1, compu: 1, teclado: 1, ingles: 1, geografia: 1 },
-            experta: { matematica: 1, compu: 1, teclado: 1, ingles: 1, geografia: 1 },
-            prodigio: { matematica: 1, compu: 1, teclado: 1, ingles: 1, geografia: 1 }
+            inicial: { matematica: 1, compu: 1, teclado: 1, ingles: 1, claves: 1},
+            intermedia: { matematica: 1, compu: 1, teclado: 1, ingles: 1, claves: 1},
+            dificil: { matematica: 1, compu: 1, teclado: 1, ingles: 1, claves: 1},
+            experta: { matematica: 1, compu: 1, teclado: 1, ingles: 1, claves: 1},
+            prodigio: { matematica: 1, compu: 1, teclado: 1, ingles: 1, claves: 1 }
         },
         inventory: ['t1', 'l1', 'h1'], 
         skin: { head:'#ffcc80', torso:'#29b6f6', legs:'#3f51b5', arm:'#ffcc80' } 
@@ -667,13 +515,95 @@
                 player = saved;
             }
         }
-        if(localStorage.getItem('eduDB')) localDB = JSON.parse(localStorage.getItem('eduDB'));
-        
+        if(localStorage.getItem('eduDB')) {
+            localDB = JSON.parse(localStorage.getItem('eduDB'));
+        }
+        Object.keys(player.progress).forEach(k => {
+            if(!player.progress[k].claves) player.progress[k].claves = 1;
+        });
         document.getElementById('usernameInput').value = player.name;
         document.getElementById('gradeSelect').value = player.grade;
         updateUI();
         syncWithCloud();
     };
+
+    //
+    function renderPasswordTool(container) {
+        container.innerHTML = `
+            <div style="text-align:left; padding:10px;">
+                <label>Longitud: <input type="number" id="pwdLength" min="4" max="20" value="12" style="width:60px; padding:5px;"></label>
+                
+                <div style="margin:10px 0; display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.7rem;">
+                    <label><input type="checkbox" id="incUpper" checked> Mayúsculas (ABC)</label>
+                    <label><input type="checkbox" id="incLower" checked> Minúsculas (abc)</label>
+                    <label><input type="checkbox" id="incNum" checked> Números (123)</label>
+                    <label><input type="checkbox" id="incSym" checked> Símbolos (@#$)</label>
+                </div>
+
+                <button class="mc-btn blue" style="width:100%; margin-bottom:15px;" onclick="generateLogic()">🔄 Generar Nueva</button>
+                
+                <div id="resultPwd" style="background:#263238; color:#81c784; padding:15px; font-family:monospace; font-size:1.2rem; letter-spacing:2px; border:2px solid #fff; text-align:center; margin-bottom:20px;">???</div>
+
+                <hr style="border:1px dashed #90a4ae; margin:20px 0;">
+
+                <h4 style="margin:0 0 10px 0; color:#0277bd;">Guardar en mi lista:</h4>
+                <input type="text" id="siteName" placeholder="Ej: Correo, Instagram..." style="margin-bottom:10px;">
+                <button class="mc-btn green" style="width:100%;" onclick="saveLogic()">💾 Guardar</button>
+
+                <div id="savedList" style="margin-top:15px; background:#eceff1; height:120px; overflow-y:auto; border:2px solid #b0bec5; padding:5px; font-size:0.6rem;">
+                    <div style="color:#999; text-align:center; padding-top:40px;">Lista vacía, se borra despues de salir</div>
+                </div>
+            </div>
+        `;
+    }
+
+    function generateLogic() {
+        const length = document.getElementById('pwdLength').value;
+        const useUpper = document.getElementById('incUpper').checked;
+        const useLower = document.getElementById('incLower').checked;
+        const useNum = document.getElementById('incNum').checked;
+        const useSym = document.getElementById('incSym').checked;
+
+        let chars = "";
+        if (useUpper) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        if (useLower) chars += "abcdefghijklmnopqrstuvwxyz";
+        if (useNum) chars += "0123456789";
+        if (useSym) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+        if (chars === "") return showToast("Elige una opción", "error");
+
+        let password = "";
+        for (let i = 0; i < length; i++) {
+            password += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById('resultPwd').innerText = password;
+    }
+
+    function saveLogic() {
+        const site = document.getElementById('siteName').value;
+        const pwd = document.getElementById('resultPwd').innerText;
+
+        if (!site) return showToast("Escribe el nombre del sitio", "error");
+        if (pwd === "???") return showToast("Genera una clave primero", "error");
+
+        const list = document.getElementById('savedList');
+        // Si es el primer elemento, borramos el mensaje de "vacío"
+        if(list.innerText.includes("Lista vacía")) list.innerHTML = "";
+
+        const item = document.createElement('div');
+        item.style.borderBottom = "1px solid #ccc";
+        item.style.padding = "5px";
+        item.innerHTML = `<span style="color:#37474f; font-weight:bold;">${site}:</span> <span style="color:#0277bd; font-family:monospace;">${pwd}</span>`;
+        
+        list.appendChild(item);
+        
+        // Limpiar y Dar recompensa
+        document.getElementById('siteName').value = "";
+        player.coins += 0; 
+        updateUI();
+        //showToast("¡Guardada! +0 🪙");
+    }
+    //
 
     function saveData() {
         localStorage.setItem('eduPlayer', JSON.stringify(player));
@@ -830,8 +760,6 @@
             q = item.q; ans = item.ans; opts = item.opts.sort(()=>Math.random()-0.5);
         }
         if (subj === 'compu') {
-            
-//
             let target = "", prompt = "", showStats = false;
             let pool = DB_COMPUTING[player.grade]; 
             // Modo Prodigio: Case Sensitive
@@ -874,21 +802,16 @@
             
             if(!target) target = "HOLA"; 
             ans = target;
-
-
-//
-
-        }
-        else if (subj === 'ingles') {
+        }else if (subj === 'ingles') {
             const item = getRandom(DB_INGLES); 
             q = item.q; ans = item.ans; opts = item.opts.sort(()=>Math.random()-0.5);
-        }
-        if (subj === 'matematica'){ //matematica
+        
+        }else if (subj === 'matematica'){ //matematica
+            
             let a, b, opSelector;
             let range = 10; // Rango base por defecto
-
-            // 1. NIVEL INICIAL (Grados 1-2 aprox)
-            if (player.grade === 'inicial') {
+            
+            if (player.grade === 'inicial') { // 1. NIVEL INICIAL (Grados 1-2 aprox)
                 opSelector = Math.random();
                 if (opSelector < 0.4) { // Suma (1-20)
                     a = Math.floor(Math.random() * 20) + 1;
@@ -909,9 +832,7 @@
                     q = `¿${a} / ${b}?`;
                 }
             } 
-            
-            // 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
-            else if (player.grade === 'intermedia') {
+            else if (player.grade === 'intermedia') {// 2. NIVEL INTERMEDIA (Grados 3-4 aprox)
                 opSelector = Math.random();
                 if (opSelector < 0.3) { // Suma (Hasta 100)
                     a = Math.floor(Math.random() * 80) + 10;
@@ -932,9 +853,7 @@
                     q = `¿${a} / ${b}?`;
                 }
             }
-
-            // 3. NIVEL DIFICIL (Grados 5-6 aprox)
-            else if (player.grade === 'dificil') {
+            else if (player.grade === 'dificil') {// 3. NIVEL DIFICIL (Grados 5-6 aprox)
                 opSelector = Math.random();
                 if (opSelector < 0.3) { // Suma (Centenas)
                     a = Math.floor(Math.random() * 400) + 100;
@@ -1053,115 +972,164 @@
 
     function applyTexture(elementId, value) {
         const el = document.getElementById(elementId);
-    if(!el) return;
-    if(value && (value.startsWith('http') || value.startsWith('data:image'))) {
-        el.style.backgroundColor = 'transparent'; el.style.backgroundImage = `url('${value}')`;
-    } else {
-        el.style.backgroundImage = 'none'; el.style.backgroundColor = value;
+        if(!el) return;
+        if(value && (value.startsWith('http') || value.startsWith('data:image'))) {
+            el.style.backgroundColor = 'transparent'; el.style.backgroundImage = `url('${value}')`;
+        } else {
+            el.style.backgroundImage = 'none'; el.style.backgroundColor = value;
+        }
     }
-}
 
-function updateUI() {
-    document.getElementById('uiCoins').innerText = player.coins;
-    const p = player.progress[player.grade];
-    document.getElementById('lbl-math').innerText = p.matematica;
-    document.getElementById('lbl-logic').innerText = p.compu;
-    document.getElementById('lbl-typing').innerText = p.teclado;
-    document.getElementById('lbl-ingles').innerText = p.ingles;
+    function updateUI() {
+        document.getElementById('uiCoins').innerText = player.coins;
+        const p = player.progress[player.grade];
+        document.getElementById('lbl-math').innerText = p.matematica;
+        document.getElementById('lbl-logic').innerText = p.compu;
+        document.getElementById('lbl-typing').innerText = p.teclado;
+        document.getElementById('lbl-ingles').innerText = p.ingles;
+        
+        applyTexture('avHead', player.skin.head || '#ffcc80');
+        applyTexture('avTorso', player.skin.torso);
+        applyTexture('avLegL', player.skin.legs);
+        applyTexture('avLegR', player.skin.legs);
+        applyTexture('avArmL', player.skin.arm || player.skin.torso);
+        applyTexture('avArmR', player.skin.arm || player.skin.torso);
+    }
+
+    function updateUsername(val) { 
+        player.name = val; saveData(); 
+    }
+    function changeGrade() { 
+        player.grade = document.getElementById('gradeSelect').value; 
+        updateUI(); 
+        showToast(`Dificultad: ${player.grade.toUpperCase()}`); 
+    }
+    function showToast(msg, type='success') {
+        const t = document.createElement('div'); t.className = `toast ${type}`;
+        t.innerHTML = `<span>${type=='success'?'✅':'❌'}</span><span>${msg}</span>`;
+        document.getElementById('notification-area').appendChild(t); setTimeout(() => t.remove(), 4000);
+    }
+    function resetGame() { 
+        if(confirm("¿Borrar todo?")) { 
+            localStorage.removeItem('eduPlayer'); location.reload(); 
+        } 
+    }
+    function showDashboard() { 
+        setView('view-dashboard'); 
+    }
+    function showShop() { 
+        setView('view-shop'); 
+        renderShop(); 
+
+    }
+    function openSubject(s) { 
+        currentSession.subject = s; 
+        
+        if (s === 'claves') {
+            // CAMINO A: Es una herramienta, abrimos directo la ventana
+            document.getElementById('gameModal').style.display = 'flex';
+            document.getElementById('gameTitle').innerText = "Generador Seguro";
+            renderPasswordTool(document.getElementById('gameContent'));  // Llamamos a la función que dibuja el generador (asegúrate de haberla pegado al final)
+
+        } 
+        else {
+            // CAMINO B: Es un juego normal, vamos al mapa de niveles
+            setView('view-map'); 
+            document.getElementById('mapTitle').innerText = s.toUpperCase(); 
+            renderMap(); 
+        }
+    }
+    function setView(id) { 
+        ['view-dashboard','view-map','view-shop']
+        .forEach(v => document.getElementById(v).style.display = 'none'); 
+        document.getElementById(id).style.display = 'block'; 
+    }
+    function closeGame() { 
+        document.getElementById('gameModal').style.display = 'none'; 
+        if(timerInterval) {
+            clearInterval(timerInterval);
+            if(currentSession.subject == 'claves'){
+                showDashboard();
+            }else{
+                renderMap();
+            }
+             
+        }
+    }
+
+    function renderMap() {
+        const grid = document.getElementById('mapGrid'); grid.innerHTML = '';
+        const cur = player.progress[player.grade][currentSession.subject];
+        for(let i=1; i<=100; i++) {
+            const btn = document.createElement('div'); btn.className = 'level-block'; btn.innerText = i;
+            if(i<cur) { btn.classList.add('completed'); btn.onclick = () => playLevel(i); }
+            else if(i===cur) { btn.classList.add('current'); btn.onclick = () => playLevel(i); }
+            else btn.classList.add('locked');
+            grid.appendChild(btn);
+        }
+    }
+
+    function renderShop() {
+        const g = document.getElementById('shopGrid'); g.innerHTML = '';
+        localDB.shopItems.forEach(it => {
+            const owned = player.inventory.includes(it.id);
+            const d = document.createElement('div'); 
+            d.className = 'panel'; 
+            d.style.textAlign='center';
+            let bgStyle = it.color.startsWith('http') ? `background-image:url('${it.color}'); background-size:cover;` : `background:${it.color};`;
+            d.innerHTML = `<div style="width:40px;height:40px;${bgStyle} margin:0 auto 10px;border:2px solid #000;"></div><b>${it.name}</b><br><span style="font-size:0.6rem; color:#666">${it.type}</span><br><small>${owned?'Tuyo':it.price}</small>`;
+            d.onclick = () => {
+                if(owned) { 
+                    player.skin[it.type] = it.color; 
+                    saveData(); 
+                    updateUI(); 
+                    showToast("Equipado"); 
+                }
+                else if(player.coins >= it.price) { 
+                    player.coins -= it.price; player.inventory.push(it.id); 
+                    player.skin[it.type] = it.color; 
+                    saveData(); 
+                    updateUI(); 
+                    renderShop(); 
+                    showToast("Comprado"); 
+                }
+                else showToast("Faltan Monedas", 'error');
+            };
+            g.appendChild(d);
+        });
+    }
+
+    // ADMIN
+    function openAdminLogin() { 
+        document.getElementById('adminLoginModal').style.display = 'flex'; 
+    }
+    function checkAdmin() { 
+        if(document.getElementById('adminUser').value==='admin' && document.getElementById('adminPass').value==='admin') {
+            document.getElementById('adminLoginModal').style.display='none'; document.getElementById('adminPanelModal').style.display='flex';
+        } else showToast("Error", 'error');
+    }
+    function closeAdmin() { 
+        document.getElementById('adminPanelModal').style.display='none'; 
+        renderShop(); 
+    }
     
-    applyTexture('avHead', player.skin.head || '#ffcc80');
-    applyTexture('avTorso', player.skin.torso);
-    applyTexture('avLegL', player.skin.legs);
-    applyTexture('avLegR', player.skin.legs);
-    applyTexture('avArmL', player.skin.arm || player.skin.torso);
-    applyTexture('avArmR', player.skin.arm || player.skin.torso);
-}
-
-function updateUsername(val) { player.name = val; saveData(); }
-function changeGrade() { 
-    player.grade = document.getElementById('gradeSelect').value; 
-    updateUI(); 
-    showToast(`Dificultad: ${player.grade.toUpperCase()}`); 
-}
-function showToast(msg, type='success') {
-    const t = document.createElement('div'); t.className = `toast ${type}`;
-    t.innerHTML = `<span>${type=='success'?'✅':'❌'}</span><span>${msg}</span>`;
-    document.getElementById('notification-area').appendChild(t); setTimeout(() => t.remove(), 4000);
-}
-function resetGame() { if(confirm("¿Borrar todo?")) { localStorage.removeItem('eduPlayer'); location.reload(); } }
-
-function showDashboard() { setView('view-dashboard'); }
-function showShop() { setView('view-shop'); renderShop(); }
-function openSubject(s) { currentSession.subject = s; setView('view-map'); document.getElementById('mapTitle').innerText = s.toUpperCase(); renderMap(); }
-function setView(id) { ['view-dashboard','view-map','view-shop'].forEach(v => document.getElementById(v).style.display = 'none'); document.getElementById(id).style.display = 'block'; }
-function closeGame() { document.getElementById('gameModal').style.display = 'none'; if(timerInterval) clearInterval(timerInterval); renderMap(); }
-
-function renderMap() {
-    const grid = document.getElementById('mapGrid'); grid.innerHTML = '';
-    const cur = player.progress[player.grade][currentSession.subject];
-    for(let i=1; i<=100; i++) {
-        const btn = document.createElement('div'); btn.className = 'level-block'; btn.innerText = i;
-        if(i<cur) { btn.classList.add('completed'); btn.onclick = () => playLevel(i); }
-        else if(i===cur) { btn.classList.add('current'); btn.onclick = () => playLevel(i); }
-        else btn.classList.add('locked');
-        grid.appendChild(btn);
+    function adminAddLevel() {
+        const g=document.getElementById('admGrade').value, s=document.getElementById('admSubj').value, l=document.getElementById('admLvlNum').value;
+        const q=document.getElementById('admQ').value, a=document.getElementById('admAns').value, o=document.getElementById('admOpts').value;
+        if(!l||!q||!a) {
+            return showToast("Faltan Datos",'error');
+        }
+        localDB.customLevels.push({ grade: g, subject: s, level: parseInt(l), question: q, answer: a, options: o });
+        saveData(); showToast("Nivel Guardado");
     }
-}
-
-function renderShop() {
-    const g = document.getElementById('shopGrid'); g.innerHTML = '';
-    localDB.shopItems.forEach(it => {
-        const owned = player.inventory.includes(it.id);
-        const d = document.createElement('div'); 
-        d.className = 'panel'; 
-        d.style.textAlign='center';
-        let bgStyle = it.color.startsWith('http') ? `background-image:url('${it.color}'); background-size:cover;` : `background:${it.color};`;
-        d.innerHTML = `<div style="width:40px;height:40px;${bgStyle} margin:0 auto 10px;border:2px solid #000;"></div><b>${it.name}</b><br><span style="font-size:0.6rem; color:#666">${it.type}</span><br><small>${owned?'Tuyo':it.price}</small>`;
-        d.onclick = () => {
-            if(owned) { 
-                player.skin[it.type] = it.color; 
-                saveData(); 
-                updateUI(); 
-                showToast("Equipado"); 
-            }
-            else if(player.coins >= it.price) { 
-                player.coins -= it.price; player.inventory.push(it.id); 
-                player.skin[it.type] = it.color; 
-                saveData(); 
-                updateUI(); 
-                renderShop(); 
-                showToast("Comprado"); 
-            }
-            else showToast("Faltan Monedas", 'error');
-        };
-        g.appendChild(d);
-    });
-}
-
-// ADMIN
-function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'flex'; }
-function checkAdmin() { 
-    if(document.getElementById('adminUser').value==='admin' && document.getElementById('adminPass').value==='admin') {
-        document.getElementById('adminLoginModal').style.display='none'; document.getElementById('adminPanelModal').style.display='flex';
-    } else showToast("Error", 'error');
-}
-function closeAdmin() { document.getElementById('adminPanelModal').style.display='none'; renderShop(); }
-
-function adminAddLevel() {
-    const g=document.getElementById('admGrade').value, s=document.getElementById('admSubj').value, l=document.getElementById('admLvlNum').value;
-    const q=document.getElementById('admQ').value, a=document.getElementById('admAns').value, o=document.getElementById('admOpts').value;
-    if(!l||!q||!a) return showToast("Faltan Datos",'error');
-    localDB.customLevels.push({ grade: g, subject: s, level: parseInt(l), question: q, answer: a, options: o });
-    saveData(); showToast("Nivel Guardado");
-}
-
-function adminAddItem() {
-    const n=document.getElementById('admItemName').value, p=document.getElementById('admPrice').value, t=document.getElementById('admType').value, c=document.getElementById('admTexture').value;
-    if(!n || !c) return showToast("Falta Info",'error');
-    localDB.shopItems.push({ id: 'c_'+Date.now(), name: n, price: parseInt(p), type: t, color: c });
-    saveData(); showToast("Item Creado");
-}
+    
+    function adminAddItem() {
+        const n=document.getElementById('admItemName').value, p=document.getElementById('admPrice').value, t=document.getElementById('admType').value, c=document.getElementById('admTexture').value;
+        if(!n || !c) return showToast("Falta Info",'error');
+        localDB.shopItems.push({ id: 'c_'+Date.now(), name: n, price: parseInt(p), type: t, color: c });
+        saveData(); showToast("Item Creado");
+    }   
 </script>
+
 </body>
 </html>
-
